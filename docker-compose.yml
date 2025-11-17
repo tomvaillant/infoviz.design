@@ -42,6 +42,8 @@ services:
       - ./frontend/postcss.config.js:/app/postcss.config.js
       - /app/node_modules
     environment:
+      - PUBLIC_SUPABASE_URL=${PUBLIC_SUPABASE_URL}
+      - PUBLIC_SUPABASE_ANON_KEY=${PUBLIC_SUPABASE_ANON_KEY}
       - VITE_API_URL=http://localhost:8000
     command: npm run dev -- --host 0.0.0.0
     depends_on:

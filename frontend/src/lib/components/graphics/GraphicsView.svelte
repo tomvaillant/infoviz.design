@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Image as Image, Search } from 'lucide-svelte';
   import { apiClient } from '$lib/api-client';
+  import { supabaseClient } from '$lib/supabase-client';
   import { onMount } from 'svelte';
 
   // All fetched results
@@ -60,12 +61,24 @@
 
   onMount(async () => {
     try {
-      const response = await apiClient.fetchGraphicsExamples("I want you to give me in on the last 9 posts published");
-      allExamples = response.items;
-      // Show only first 2 on initial load
-      displayedExamples = response.items.slice(0, 2);
-    } catch (err: any) {
+      const { data, error } = await supabaseClient.rpc('get_random_posts', { custom_limit: 2 });
+
+      if (error) throw error;
+
+      const examples = data.map(post => ({
+        title: post.title,
+        source: post.author ?? undefined,
+        date: post.published_date ?? undefined,
+        url: post.source_url ?? undefined,
+        image: post.image_url ?? undefined,
+      }));
+
+      allExamples = examples;
+      displayedExamples = examples;
+    } catch (err) {
       examplesError = err.message || 'Failed to fetch spotlights';
+      allExamples = [];
+      displayedExamples = [];
     }
   });
 </script>
