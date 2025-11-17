@@ -1,20 +1,17 @@
 services:
   - type: web
-    name: cojournalist
+    name: infoviz
     runtime: docker
     plan: starter
     region: frankfurt
     branch: main
     dockerfilePath: ./Dockerfile
     dockerContext: .
+    healthCheckPath: /api/ready
     envVars:
+      - key: ENVIRONMENT
+        value: production
       - key: HUGGINGFACE_API_KEY
-        sync: false
-      - key: CLERK_SECRET_KEY
-        sync: false
-      - key: CLERK_PUBLISHABLE_KEY
-        sync: false
-      - key: PUBLIC_CLERK_PUBLISHABLE_KEY
         sync: false
       - key: VITE_API_URL
         value: ''

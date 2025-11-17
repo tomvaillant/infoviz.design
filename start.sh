@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# coJournalist Local Development Startup Script
+# Infoviz Local Development Startup Script
 
-echo "🚀 Starting coJournalist..."
+echo "🚀 Starting Infoviz..."
 echo ""
 
 # Check if .env exists
@@ -32,7 +32,7 @@ echo ""
 docker-compose up --build
 
 echo ""
-echo "✅ coJournalist is running!"
+echo "✅ Infoviz is running!"
 echo ""
 echo "📝 Access the application:"
 echo "   Frontend: http://localhost:5173"

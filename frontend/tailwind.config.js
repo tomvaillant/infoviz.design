@@ -4,7 +4,8 @@ export default {
 	theme: {
 		extend: {
       fontFamily: {
-        spacegrotesk: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+        sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         tiniest: '0.01em',

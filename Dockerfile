@@ -32,9 +32,9 @@ COPY backend ./backend
 COPY --from=frontend-builder /workspace/frontend/build ./backend/app/frontend_client
 
 ENV HOST=0.0.0.0 \
-    PORT=7860
+    PORT=10000
 
-EXPOSE 7860
+EXPOSE 10000
 WORKDIR /workspace/backend
 
-CMD sh -c "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-7860}"
+CMD sh -c "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"

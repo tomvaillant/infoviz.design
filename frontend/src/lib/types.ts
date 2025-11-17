@@ -1,18 +1,16 @@
 /**
- * TypeScript type definitions for coJournalist frontend.
+ * TypeScript type definitions for Infoviz frontend.
  */
 
-// Auth types (Clerk-based)
-export interface User {
-	clerk_user_id: string;
-	email: string;
-	credits: number;
-	timezone: string | null;
-	needs_initialization: boolean;
-	onboarding_completed: boolean;
+// Graphics types
+export interface GraphicsCard {
+	title: string;
+	description: string;
+	thumbnail?: string;
 }
 
-export interface AuthState {
-	authenticated: boolean;
-	user: User | null;
+export interface GraphicsExamplesResponse {
+	query: string;
+	items: GraphicsCard[];
+	raw_html?: string;
 }

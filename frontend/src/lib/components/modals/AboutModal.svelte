@@ -17,24 +17,24 @@
 
 <!-- Modal backdrop -->
 <div
-	class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+	class="fixed inset-0 bg-black01/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
 	on:click={handleBackdropClick}
 	on:keydown={(e) => e.key === 'Escape' && close()}
 	role="button"
 	tabindex="0"
 >
 	<!-- Modal content -->
-	<div class="bg-black01 rounded-2xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-auto">
+	<div class="bg-black02 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-auto border border-black03 animate-scale-in">
 		<!-- Header -->
 		<div
-			class="flex items-center justify-between p-6 sticky top-0 bg-black01 border-b border-black03"
+			class="flex items-center justify-between p-8 sticky top-0 bg-black02 border-b border-black03/50 backdrop-blur-sm"
 		>
-			<h2 class="text-2xl font-bold text-white">
+			<h2 class="font-display text-3xl font-semibold text-white tracking-tight">
 				Infoviz<span class="gradient-text">.design</span>
 			</h2>
 			<button
 				on:click={close}
-				class="text-grey03 hover:text-green01 transition-colors"
+				class="text-grey01 hover:text-green01 transition-all duration-300 hover:rotate-90"
 				aria-label="Close modal"
 			>
 				<X class="w-6 h-6" />
@@ -42,49 +42,39 @@
 		</div>
 
 		<!-- Content -->
-		<div class="p-6 space-y-8">
-			<section class="space-y-3">
-				<p class="text-md font-semibold tracking-[0.2em] text-white uppercase">Introduction</p>
-				<p class="text-grey03 leading-relaxed">
-					I’m building coJournalist to give smaller newsrooms and independent reporters access to the same investigative tooling as well-funded organizations.
-					The assistant handles scraping, monitoring, data access, and fact verification through natural language so you can focus on the reporting.
+		<div class="p-8 space-y-10">
+			<section class="space-y-4">
+				<h3 class="font-sans text-xs font-semibold tracking-widest text-green01 uppercase">Introduction</h3>
+				<p class="font-sans text-lg text-grey03 leading-relaxed">
+					Infoviz.design gives journalists easy access to visual inspiration and graphics. Browse curated examples to spark ideas and elevate your storytelling.
 				</p>
 			</section>
 
-			<section class="space-y-3">
-				<p class="text-md font-semibold tracking-[0.2em] text-white uppercase">Methodology & Privacy</p>
-				<ul class="space-y-2 text-grey03 leading-relaxed list-disc ml-5">
-					<li>I only store the scraper configurations you create (URLs, criteria, schedule). The scraped outputs are streamed back to you and never retained on the server.</li>
-					<li>Firecrawl powers website scraping, Apify handles social media monitoring, and Factiverse assists with claim verification. Hugging Face models are used for language tasks.</li>
-					<li>Each request is scoped to the minimum data necessary. Credentials stay with Clerk; I do not store passwords or tokens.</li>
-				</ul>
-			</section>
-
-			<section class="space-y-2">
-				<p class="text-md font-semibold tracking-[0.2em] text-white uppercase">Support</p>
-				<p class="text-grey03 leading-relaxed">
-					Supported by GRS.
+			<section class="space-y-4">
+				<h3 class="font-sans text-xs font-semibold tracking-widest text-green01 uppercase">Team</h3>
+				<p class="font-sans text-lg text-grey03 leading-relaxed">
+					Developed by <span class="text-white font-medium">Tom Vaillant</span> and <span class="text-white font-medium">Remy Dumas</span>.
 				</p>
 			</section>
 
-			<section class="space-y-2">
-				<p class="text-md font-semibold tracking-[0.2em] text-white uppercase">Contact</p>
-				<p class="text-grey03 leading-relaxed">
-					I share progress notes on my
+			<section class="space-y-4">
+				<h3 class="font-sans text-xs font-semibold tracking-widest text-green01 uppercase">Contact</h3>
+				<p class="font-sans text-lg text-grey03 leading-relaxed">
+					You can follow my work on
 					<a
 						href="https://buriedsignals.substack.com/"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-green01 hover:text-white font-medium"
+						class="text-green01 hover:text-white font-medium transition-colors duration-300 underline underline-offset-4 decoration-green01/30"
 					>
-						newsletter
+						Substack
 					</a>
-					and publish data-driven investigations on
+					and
 					<a
 						href="https://www.youtube.com/@buriedsignals"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-green01 hover:text-white font-medium"
+						class="text-green01 hover:text-white font-medium transition-colors duration-300 underline underline-offset-4 decoration-green01/30"
 					>
 						YouTube
 					</a>.
@@ -93,10 +83,10 @@
 		</div>
 
 		<!-- Footer -->
-		<div class="p-6 bg-black01 border-t border-black03">
+		<div class="p-8 bg-black02 border-t border-black03/50">
 			<button
 				on:click={close}
-				class="btn-primary w-full font-light text-base"
+				class="btn-primary w-full font-sans font-medium text-base py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
 			>
 				Close
 			</button>

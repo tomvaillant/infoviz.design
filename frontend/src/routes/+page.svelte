@@ -1,19 +1,8 @@
 <script lang="ts">
-import { onMount } from 'svelte';
-import { authStore } from '$lib/stores/auth';
 import GraphicsView from '$lib/components/graphics/GraphicsView.svelte';
 import AboutModal from '$lib/components/modals/AboutModal.svelte';
-import { Bell } from 'lucide-svelte';
 
 	let showAboutModal = false;
-	let userButtonContainer: HTMLDivElement;
-
-	onMount(() => {
-		// Mount Clerk UserButton
-		if (userButtonContainer) {
-			authStore.mountUserButton(userButtonContainer);
-		}
-	});
 
 	function openAboutModal() {
 		showAboutModal = true;
@@ -24,49 +13,32 @@ import { Bell } from 'lucide-svelte';
 	}
 </script>
 
-<div class="h-screen flex flex-col bg-gray-50">
-	<!-- Combined top bar -->
-	<div class="bg-black02 px-12 py-5 flex items-center justify-between gap-4">
-		<!-- Left: Logo -->
-		<div class="flex-shrink-0">
-			Infoviz<span class="gradient-text">.design</span>
-		</div>
-
-		<!-- Right: Clerk User info + UserButton -->
-		<div class="flex items-center gap-4">
-			{#if $authStore.user}
-				<div class="text-right">
-					<div class="text-base text-white">
-						{$authStore.user.credits} credits
-					</div>
-				</div>
-			{/if}
-			<div bind:this={userButtonContainer}></div>
-		</div>
-	</div>
-
+<div class="min-h-screen flex flex-col bg-black01 pb-20">
 	<!-- Main content area -->
-	<div class="flex-1 overflow-hidden">
-			<GraphicsView />
+	<div class="flex-1">
+		<GraphicsView />
 	</div>
 
-	<!-- Footer -->
-	<footer class="bg-black02 px-12 py-4">
-		<div class="flex items-center justify-between gap-4 space-x-4 text-sm text-gray-600">
-			<button
-				on:click={openAboutModal}
-				class="text-base text-white hover:text-green01 transition-colors"
-			>
-				About
-			</button>
-      <div class="flex gap-3">
-        <a href="https://huggingface.co/tomvaillant" target="_blank" rel="noopener noreferrer">
+	<!-- Footer - Fixed at bottom -->
+	<footer class="fixed bottom-0 left-0 right-0 bg-black02/90 backdrop-blur-md px-12 py-5 border-t border-black03/50 animate-fade-in delay-100 z-40">
+		<div class="flex items-center justify-between gap-4">
+			<div class="logo-text text-sm">
+				Infoviz<span class="gradient-text">.design</span>
+			</div>
+      <div class="flex items-center gap-6">
+				<button
+					on:click={openAboutModal}
+					class="font-sans font-medium text-sm text-grey03 hover:text-green01 transition-colors duration-300"
+				>
+					About
+				</button>
+        <a href="https://huggingface.co/tomvaillant" target="_blank" rel="noopener noreferrer" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
           <img src="/logos/huggingface.svg" alt="Hugging Face" class="h-5" />
         </a>
-        <a href="https://www.youtube.com/@buriedsignals" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <a href="https://www.youtube.com/@buriedsignals" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
           <img src="/logos/youtube.svg" alt="YouTube" class="h-5" />
         </a>
-        <a href="https://www.linkedin.com/in/tomvaillant/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/tomvaillant/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="opacity-60 hover:opacity-100 transition-opacity duration-300">
           <img src="/logos/linkedin.svg" alt="LinkedIn" class="h-5" />
         </a>
       </div>
@@ -81,6 +53,13 @@ import { Bell } from 'lucide-svelte';
 
 <style>
 	:global(body) {
-		font-family: 'Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif';
+		font-family: 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif';
+	}
+
+	.logo-text {
+		font-family: 'Fraunces', 'ui-serif', 'Georgia', 'serif';
+		font-weight: 600;
+		font-size: 1.5rem;
+		letter-spacing: -0.02em;
 	}
 </style>

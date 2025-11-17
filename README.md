@@ -1,4 +1,4 @@
-# coJournalist - AI-Powered Journalism Assistant
+# Infoviz - AI-Powered Journalism Assistant
 
 A full-stack application built with **SvelteKit** (frontend) and **FastAPI** (backend), designed to help journalists with data analysis, fact-checking, web scraping, and OSINT investigations.
 
@@ -15,7 +15,7 @@ A full-stack application built with **SvelteKit** (frontend) and **FastAPI** (ba
 ## 🏗️ Architecture
 
 ```
-coJournalist-svelte/
+Infoviz-svelte/
 ├── frontend/          # SvelteKit app (TypeScript + Tailwind)
 │   ├── src/
 │   │   ├── routes/              # Pages (+layout, +page)
@@ -51,7 +51,7 @@ coJournalist-svelte/
 
 1. **Clone and configure**
    ```bash
-   cd coJournalist-svelte
+   cd Infoviz-svelte
    cp .env.example .env
    ```
 
@@ -183,9 +183,9 @@ uvicorn app.main:app --reload
 The backend integrates with these HF Spaces:
 
 - **DATA**: `tomvaillant/cojournalist-data` (Swiss Parliament + BFS)
-- **GRAPHICS**: `coJournalist/cojournalist-graphics`
-- **INVESTIGATE**: `coJournalist/cojournalist-investigate`
-- **FACT-CHECK**: `coJournalist/coJournalist-Fact-Check`
+- **GRAPHICS**: `Infoviz/cojournalist-graphics`
+- **INVESTIGATE**: `Infoviz/cojournalist-investigate`
+- **FACT-CHECK**: `Infoviz/Infoviz-Fact-Check`
 
 ## 📝 Environment Variables
 
@@ -346,7 +346,7 @@ Contributions welcome! Please open an issue or PR.
 - **Supabase** - Authentication & database
 - **Bellingcat** - OSINT methodology inspiration
 ---
-title: coJournalist
+title: Infoviz
 emoji: 🐳
 colorFrom: purple
 colorTo: gray
@@ -354,4 +354,4 @@ sdk: docker
 app_port: 7860
 ---
 
-# coJournalist - AI-Powered Journalism Assistant
+# Infoviz - AI-Powered Journalism Assistant

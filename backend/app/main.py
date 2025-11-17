@@ -13,7 +13,7 @@ from starlette.types import Scope
 from starlette.responses import Response
 
 from app.config import settings
-from app.routers import auth, graphics, onboarding
+from app.routers import graphics
 
 # Configure logging
 log_level = logging.DEBUG if settings.environment == "development" else logging.INFO
@@ -54,7 +54,7 @@ class SPAStaticFiles(StaticFiles):
 # Create FastAPI app
 app = FastAPI(
     title=settings.app_name,
-    description="Backend API for coJournalist - AI-powered journalism assistant",
+    description="Backend API for Infoviz - Information visualization platform",
     version="1.0.0",
     debug=settings.debug,
 )
@@ -70,8 +70,6 @@ app.add_middleware(
 
 
 # Include routers
-app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
-app.include_router(onboarding.router, prefix="/api/onboarding", tags=["Onboarding"])
 app.include_router(graphics.router, prefix="/api", tags=["Graphics"])
 
 # Serve built frontend if available
@@ -93,13 +91,10 @@ async def readiness_check():
 async def startup_event():
     """Log startup information."""
     logger.info("=" * 50)
-    logger.info("🚀 coJournalist API Starting...")
+    logger.info("🚀 Infoviz API Starting...")
     logger.info(f"App Name: {settings.app_name}")
     logger.info(f"Environment: {settings.environment}")
     logger.info(f"Debug Mode: {settings.debug}")
-    logger.info(f"Clerk Auth: {'Configured' if settings.clerk_secret_key else 'Not configured'}")
-    logger.info(f"Default Credits: {settings.default_credits}")
-    logger.info(f"Default Timezone: {settings.default_timezone}")
     logger.info("=" * 50)
 
 

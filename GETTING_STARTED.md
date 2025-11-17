@@ -1,6 +1,6 @@
-# 🚀 Getting Started with coJournalist
+# 🚀 Getting Started with Infoviz
 
-This guide will help you set up and test your newly migrated coJournalist application.
+This guide will help you set up and test your newly migrated Infoviz application.
 
 ## ✅ What's Been Completed
 
@@ -132,7 +132,7 @@ CREATE TRIGGER on_auth_user_created
 ### 3. Configure Environment
 
 ```bash
-cd coJournalist-svelte
+cd Infoviz-svelte
 cp .env.example .env
 ```
 
