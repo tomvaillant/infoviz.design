@@ -38,7 +38,7 @@
   onMount(async () => {
     try {
       const response = await apiClient.fetchGraphicsExamples("I want you to give me in on the last 9 posts published");
-      examples = response.itemss.slice(0, 2);
+      examples = response.items.slice(0, 2);
     } catch (err: any) {
       examplesError = err.message || 'Failed to fetch spotlights';
     }
