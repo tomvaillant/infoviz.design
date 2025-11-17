@@ -100,7 +100,7 @@
 
         <!-- Form Section -->
         <section class="mb-12 animate-fade-in-up opacity-0 delay-100">
-            <form on:submit|preventDefault={handleSubmit} class="flex gap-3 mb-3">
+            <form on:submit|preventDefault={handleSubmit} class="flex flex-col md:flex-row gap-3 mb-3">
               <div class="relative flex-1">
                 <input
                   type="text"
@@ -115,7 +115,7 @@
                 </div>
               </div>
 
-              <button type="submit" disabled={!canSubmit} class="btn-primary gap-2 px-6 py-3 font-sans font-medium text-sm rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap">
+              <button type="submit" disabled={!canSubmit} class="btn-primary gap-2 px-6 py-3 font-sans font-medium text-sm rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full md:w-auto whitespace-nowrap">
                 {#if (isLoading)}
                   <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-black02"></div>
                   Searching...
