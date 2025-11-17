@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: cojournalist
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: HUGGINGFACE_API_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: VITE_API_URL
+        value: ''
+      - key: DEBUG
+        value: false
+      - key: FACTIVERSE_API_TOKEN
+        sync: false

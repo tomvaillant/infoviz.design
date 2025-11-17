@@ -1,0 +1,32 @@
+# FastAPI and server
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+pydantic>=2.11.2
+pydantic-settings==2.6.0
+
+# Hugging Face integration
+huggingface-hub==0.26.2
+gradio-client>=1.13.3
+
+# LangChain (for prompt building and future orchestration)
+langchain==0.3.7
+langchain-huggingface==0.1.2
+langchain-core==0.3.15
+
+# Clerk authentication
+clerk-backend-api==2.2.0
+
+# HTTP and parsing
+requests==2.32.3
+beautifulsoup4==4.12.3
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Async support
+asyncio==3.4.3
+aiohttp==3.11.7
+
+# Logging and monitoring
+python-json-logger==2.0.7
