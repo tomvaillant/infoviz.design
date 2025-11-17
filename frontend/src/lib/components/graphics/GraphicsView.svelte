@@ -1,24 +1,13 @@
 <script lang="ts">
   import { Image as Image, Search } from 'lucide-svelte';
   import { apiClient } from '$lib/api-client';
+  import { onMount } from 'svelte';
 
   let examples: Array<{title: string; image?: string; source?: string; date?: string; url?: string}> = [];
   let examplesError: string | null = null;
   let examplesLoading = false;
 
-  examples = [{
-      title: "75 years of innovation: How F1 has evolved since 1950 and where it's headed",
-      source: "75 years of innovation: How F1 has evolved since 1950",
-      date: "12/12/2021",
-      url: "google.fr",
-      image: null
-    },{
-      title: "75 yeaded",
-      source: "source",
-      date: "12/01/2021",
-      url: "google.fr",
-      image: "https://files.muzli.cloud/d69da35e53d78880cd3487de80d03db7_medium.jpeg"
-    }]
+  examples = []
 
   // Form state
   let prompt = '';
@@ -33,7 +22,6 @@
   }
 
   async function fetchExamples(prompt: string) {
-    examples = [];
     examplesError = null;
     examplesLoading = true;
 
@@ -46,6 +34,15 @@
       examplesLoading = false;
     }
   }
+
+  onMount(async () => {
+    try {
+      const response = await apiClient.fetchGraphicsExamples("I want you to give me in on the last 9 posts published");
+      examples = response.items;
+    } catch (err: any) {
+      examplesError = err.message || 'Failed to fetch spotlights';
+    }
+  });
 </script>
 
 <div class="flex h-full overflow-hidden bg-black01">
