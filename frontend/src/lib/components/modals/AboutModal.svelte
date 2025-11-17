@@ -51,6 +51,23 @@
 			</section>
 
 			<section class="space-y-4">
+				<h3 class="font-sans text-xs font-semibold tracking-widest text-green01 uppercase">How it works</h3>
+				<p class="font-sans text-base text-grey03 leading-relaxed">
+					This application combines several technologies to search and retrieve visual journalism examples:
+				</p>
+				<ul class="font-sans text-base text-grey03 leading-relaxed space-y-2 list-disc list-inside pl-2">
+					<li><span class="text-white font-medium">Vanna.AI</span> — Uses RAG (Retrieval-Augmented Generation) with ChromaDB vector store to semantically search a curated database of visual stories</li>
+					<li><span class="text-white font-medium">Supabase</span> — PostgreSQL database storing metadata, sources, and publication information</li>
+					<li><span class="text-white font-medium">HuggingFace Spaces</span> — Hosts the search model and provides inference API</li>
+					<li><span class="text-white font-medium">FastAPI + SvelteKit</span> — Backend API and frontend interface</li>
+					<li><span class="text-white font-medium">Gradio Client</span> — Connects to the HuggingFace Space for query processing</li>
+				</ul>
+				<p class="font-sans text-sm text-grey01 leading-relaxed mt-4 italic">
+					This is a prototype. The search leverages semantic similarity rather than keyword matching, which can yield creative results but may occasionally return less relevant items.
+				</p>
+			</section>
+
+			<section class="space-y-4">
 				<h3 class="font-sans text-xs font-semibold tracking-widest text-green01 uppercase">Team</h3>
 				<p class="font-sans text-lg text-grey03 leading-relaxed">
 					Developed by <span class="text-white font-medium">Tom Vaillant</span> and <span class="text-white font-medium">Remy Dumas</span>.

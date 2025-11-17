@@ -3,12 +3,18 @@
   import { apiClient } from '$lib/api-client';
   import { onMount } from 'svelte';
 
-  let examples: Array<{title: string; image?: string; source?: string; date?: string; url?: string}> = [];
+  // All fetched results
+  let allExamples: Array<{title: string; image?: string; source?: string; date?: string; url?: string}> = [];
+  // Currently displayed results
+  let displayedExamples: Array<{title: string; image?: string; source?: string; date?: string; url?: string}> = [];
+
   let examplesError: string | null = null;
   let examplesLoading = false;
   let hasSearched = false; // Track if user has performed a search
 
-  examples = []
+  // Pagination state
+  const ITEMS_PER_PAGE = 9;
+  let currentPage = 1;
 
   // Form state
   let prompt = '';
@@ -16,10 +22,14 @@
   $: isLoading = examplesLoading;
   $: promptReady = prompt.trim().length > 0;
   $: canSubmit = promptReady && !(isLoading);
+  $: totalResults = allExamples.length;
+  $: hasMore = displayedExamples.length < totalResults;
+  $: showingCount = displayedExamples.length;
 
   function handleSubmit() {
     if (!prompt.trim() || isLoading) return;
-    hasSearched = true; // Mark that user has searched
+    hasSearched = true;
+    currentPage = 1; // Reset pagination on new search
     fetchExamples(prompt.trim());
   }
 
@@ -29,18 +39,31 @@
 
     try {
       const response = await apiClient.fetchGraphicsExamples(prompt);
-      examples = response.items;
+      allExamples = response.items;
+      // Show first page of results
+      displayedExamples = allExamples.slice(0, ITEMS_PER_PAGE);
+      currentPage = 1;
     } catch (err: any) {
       examplesError = err.message || 'Failed to fetch spotlights';
+      allExamples = [];
+      displayedExamples = [];
     } finally {
       examplesLoading = false;
     }
   }
 
+  function loadMore() {
+    currentPage += 1;
+    const endIndex = currentPage * ITEMS_PER_PAGE;
+    displayedExamples = allExamples.slice(0, endIndex);
+  }
+
   onMount(async () => {
     try {
       const response = await apiClient.fetchGraphicsExamples("I want you to give me in on the last 9 posts published");
-      examples = response.items.slice(0, 2);
+      allExamples = response.items;
+      // Show only first 2 on initial load
+      displayedExamples = response.items.slice(0, 2);
     } catch (err: any) {
       examplesError = err.message || 'Failed to fetch spotlights';
     }
@@ -64,7 +87,7 @@
 
         <!-- Form Section -->
         <section class="mb-12 animate-fade-in-up opacity-0 delay-100">
-            <form on:submit|preventDefault={handleSubmit} class="flex gap-3">
+            <form on:submit|preventDefault={handleSubmit} class="flex gap-3 mb-3">
               <div class="relative flex-1">
                 <input
                   type="text"
@@ -88,6 +111,13 @@
                 {/if}
               </button>
             </form>
+
+            <!-- Disclaimer bubble -->
+            <div class="bg-black03/50 border border-black03 rounded-lg px-4 py-2.5">
+              <p class="font-sans font-light text-xs text-grey03 leading-relaxed">
+                <span class="text-orange01 font-medium">Note:</span> This is a prototype. Search may be slow and some results might be irrelevant.
+              </p>
+            </div>
         </section>
 
           {#if examplesError}
@@ -96,15 +126,21 @@
                 <p class="font-sans font-medium text-sm text-orange01">{examplesError}</p>
               </div>
             </div>
-          {:else if examples.length > 0}
+          {:else if displayedExamples.length > 0}
             <div class="space-y-6 animate-fade-in opacity-0 delay-200">
-              {#if !hasSearched}
-                <h2 class="font-display font-semibold text-2xl md:text-3xl text-white">
-                  Daily features
-                </h2>
-              {/if}
+              <div class="flex items-center justify-between">
+                {#if !hasSearched}
+                  <h2 class="font-display font-semibold text-2xl md:text-3xl text-white">
+                    Daily features
+                  </h2>
+                {:else}
+                  <p class="font-sans font-light text-sm text-grey03">
+                    Showing {showingCount} of {totalResults} results
+                  </p>
+                {/if}
+              </div>
               <div class="grid grid-cols-1 gap-5">
-                {#each examples as example, i}
+                {#each displayedExamples as example, i}
                   <a
                     href={example.url}
                     target="_blank"
@@ -143,6 +179,18 @@
                   </a>
                 {/each}
               </div>
+
+              <!-- Load More Button - Only show after user has searched -->
+              {#if hasMore && hasSearched}
+                <div class="flex justify-center mt-8">
+                  <button
+                    on:click={loadMore}
+                    class="btn-primary px-8 py-3 font-sans font-medium text-sm rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
+                  >
+                    Load more results
+                  </button>
+                </div>
+              {/if}
             </div>
           {/if}
 
@@ -163,7 +211,7 @@
                   Buried Signals
                 </h3>
                 <p class="font-sans font-light text-sm md:text-base text-grey03 mb-6 max-w-xl mx-auto leading-relaxed">
-                  The monthly newsletter for journalists who want to tell stories visually. Decoding the tools and methodologies used in exceptional visual investigations.
+                  The monthly newsletter about visual investigations and the tools to create them.
                 </p>
                 <a
                   href="https://buriedsignals.substack.com/"
